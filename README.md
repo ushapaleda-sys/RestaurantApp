@@ -1,19 +1,17 @@
 # 🍽️ Restaurant Ordering Web Application
 
-A dynamic restaurant ordering web application developed using **Java Servlets, JSP, JDBC, MySQL, HTML, CSS, Bootstrap, and Apache Tomcat**.
+A dynamic restaurant ordering web application built using **Java Servlets, JSP, JDBC, MySQL, HTML, CSS, Bootstrap, and Apache Tomcat**.
 
 ## 🚀 Features
 
-* 👤 User Registration & Login
-* 🏠 Attractive Home Page
-* 🍴 Restaurant Listing
-* 📋 Restaurant Menu
-* 🛒 Shopping Cart
-* 💳 Order Placement
-* 📦 Order History
-* 👤 User Profile Management
-* 🔍 Search Functionality
-* 📱 Responsive UI
+* User Registration & Login
+* Restaurant Listing
+* Restaurant Menu
+* Add to Cart
+* Place Orders
+* Order History
+* User Profile
+* Responsive Design
 
 ## 🛠️ Technologies Used
 
@@ -22,60 +20,56 @@ A dynamic restaurant ordering web application developed using **Java Servlets, J
 * Servlets
 * JDBC
 * MySQL
-* HTML5
-* CSS3
-* Bootstrap 5
-* Apache Tomcat 10
-
-## 📂 Project Structure
-
-```text
-RestaurantApp
-│
-├── src/
-│   ├── servlet/
-│   ├── dao/
-│   ├── daoimpl/
-│   ├── model/
-│   └── utility/
-│
-├── webapp/
-│   ├── css/
-│   ├── images/
-│   ├── videos/
-│   ├── home.jsp
-│   ├── login.jsp
-│   ├── register.jsp
-│   ├── cart.jsp
-│   ├── menu.jsp
-│   ├── profile.jsp
-│   └── ...
-```
-
-## ⚙️ Software Used
-
-* Eclipse IDE
-* Apache Tomcat 10
-* MySQL Workbench
-* Git
-* GitHub
-
-## 🗄️ Database
-
-**Database Name:** `restaurantdb`
-
-Main Tables:
-
-* users
-* restaurants
-* menu
-* cart
-* orders
-* orderitems
+* HTML
+* CSS
+* Bootstrap
+* Apache Tomcat
 
 ## 📸 Screenshots
 
-(Add screenshots here later.)
+### Login Page
+
+![Login](images/login.png)
+
+### Register Page
+
+![Register](images/register.png)
+
+### Home Page
+
+![Home](images/home.png)
+
+### Restaurant Page
+
+![Restaurant](images/restaurants.png)
+
+### Menu Page
+
+![Menu](images/menu.png)
+
+### Cart Page
+
+![Cart](images/cart.png)
+
+### Orders Page
+
+![Orders](images/orders.png)
+
+### Profile Page
+
+![Profile](images/profile.png)
+
+## 🎥 Demo Video
+
+Download and watch the project demo from this repository or replace this section with a YouTube link if you upload your demo there.
+
+## ⚙️ Installation
+
+1. Clone the repository.
+2. Import the project into Eclipse IDE.
+3. Configure Apache Tomcat.
+4. Import the MySQL database.
+5. Run the project.
 
 ## 👩‍💻 Developed By
 
