@@ -1,17 +1,16 @@
 # 🍽️ Restaurant Ordering Web Application
 
-A dynamic restaurant ordering web application built using **Java Servlets, JSP, JDBC, MySQL, HTML, CSS, Bootstrap, and Apache Tomcat**.
+A web-based restaurant ordering system developed using **Java Servlets, JSP, JDBC, MySQL, HTML, CSS, Bootstrap, and Apache Tomcat**.
 
 ## 🚀 Features
 
 * User Registration & Login
-* Restaurant Listing
-* Restaurant Menu
+* Browse Restaurants
+* View Restaurant Menus
 * Add to Cart
 * Place Orders
 * Order History
-* User Profile
-* Responsive Design
+* User Profile Management
 
 ## 🛠️ Technologies Used
 
@@ -25,54 +24,18 @@ A dynamic restaurant ordering web application built using **Java Servlets, JSP, 
 * Bootstrap
 * Apache Tomcat
 
-## 📸 Screenshots
+## ⚙️ How to Run
 
-### Login Page
-
-![Login](images/login.png)
-
-### Register Page
-
-![Register](images/register.png)
-
-### Home Page
-
-![Home](images/home.png)
-
-### Restaurant Page
-
-![Restaurant](images/restaurants.png)
-
-### Menu Page
-
-![Menu](images/menu.png)
-
-### Cart Page
-
-![Cart](images/cart.png)
-
-### Orders Page
-
-![Orders](images/orders.png)
-
-### Profile Page
-
-![Profile](images/profile.png)
-
-## 🎥 Demo Video
-
-Download and watch the project demo from this repository or replace this section with a YouTube link if you upload your demo there.
-
-## ⚙️ Installation
-
-1. Clone the repository.
-2. Import the project into Eclipse IDE.
+1. Clone this repository.
+2. Import the project into Eclipse.
 3. Configure Apache Tomcat.
 4. Import the MySQL database.
-5. Run the project.
+5. Run the application.
 
-## 👩‍💻 Developed By
+## 📂 Repository
+
+Code: https://github.com/ushapaleda-sys/RestaurantApp
+
+## 👩‍💻 Developer
 
 **Usha P T**
-
-GitHub: https://github.com/ushapaleda-sys
