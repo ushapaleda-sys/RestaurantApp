@@ -68,25 +68,26 @@
     <a href="menu?restaurantId=<%= session.getAttribute("restaurantId") %>&category=Fried Rice" class="filter-pill">🍚 Fried Rice</a>
   </div>
   <div class="row g-4">
-    <% List<Menu> menuList=(List<Menu>)request.getAttribute("menuList");
-       if(menuList!=null&&!menuList.isEmpty()){for(Menu item:menuList){
-         String img="default.jpg"; String n=item.getName().toLowerCase();
-         if(n.contains("biryani"))img="biryani.jpg";
-         else if(n.contains("burger") && n.contains("zinger"))img="zinger.jpg";
-         else if(n.contains("burger"))img="burger.jpg";
-         else if(n.contains("pizza"))img="pizza.jpg";
-         else if(n.contains("fried rice"))img="friedrice.jpg";
-         else if(n.contains("dosa"))img="dosa.jpg";
-         else if(n.contains("idli") || n.contains("vada"))img="idalivada.jpg";
-         else if(n.contains("sea food") || n.contains("seafood") || n.contains("fish") || n.contains("prawn"))img="sea_food.jpg";
-         else if(n.contains("fries"))img="fries.jpg";
-         else if(n.contains("coffee"))img="coffee.jpg";
-         else if(n.contains("mini meals"))img="minimeals.jpg";
-         else if(n.contains("naan") || n.contains("garlic bread") || n.contains("breadstick"))img="garlicbread.jpg";
-         else if(n.contains("poori"))img="poori.jpg";
-         else if(n.contains("popcorn"))img="popcorn.jpg";
-         else if(n.contains("chicken bucket"))img="chickenbucket.jpg";
-         else if(n.contains("pepsi") || n.contains("cola"))img="pepsi.jpg";
+    <%
+    List<Menu> menuList=(List<Menu>)request.getAttribute("menuList");
+           if(menuList!=null&&!menuList.isEmpty()){for(Menu item:menuList){
+             String img="default.jpg"; String n=item.getName().toLowerCase();
+             if(n.contains("biryani"))img="biryani.jpg";
+             else if(n.contains("burger") && n.contains("zinger"))img="zinger.jpg";
+             else if(n.contains("burger"))img="burger.jpg";
+             else if(n.contains("pizza"))img="pizza.jpg";
+             else if(n.contains("fried rice"))img="friedrice.jpg";
+             else if(n.contains("dosa"))img="dosa.jpg";
+             else if(n.contains("idli") || n.contains("vada"))img="idalivada.jpg";
+             else if(n.contains("sea food") || n.contains("seafood") || n.contains("fish") || n.contains("prawn"))img="sea_food.jpg";
+             else if(n.contains("fries"))img="fries.jpg";
+             else if(n.contains("coffee"))img="coffee.jpg";
+             else if(n.contains("mini meals"))img="minimeals.jpg";
+             else if(n.contains("naan") || n.contains("garlic bread") || n.contains("breadstick"))img="garlicbread.jpg";
+             else if(n.contains("poori"))img="poori.jpg";
+             else if(n.contains("popcorn"))img="popcorn.jpg";
+             else if(n.contains("chicken bucket"))img="chickenbucket.jpg";
+             else if(n.contains("pepsi") || n.contains("cola"))img="pepsi.jpg";
     %>
     <div class="col-md-6 col-lg-4">
       <div class="m-card h-100">

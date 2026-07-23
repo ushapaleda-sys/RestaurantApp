@@ -28,12 +28,11 @@ public class MenuDAOImpl implements MenuDAO {
         try {
 
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setInt(1, restaurantId);
 
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
 
                 Menu menu = new Menu();
 
@@ -47,7 +46,7 @@ public class MenuDAOImpl implements MenuDAO {
                 menuList.add(menu);
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -64,12 +63,11 @@ public class MenuDAOImpl implements MenuDAO {
         try {
 
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setInt(1, menuId);
 
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
 
                 menu = new Menu();
 
@@ -81,7 +79,7 @@ public class MenuDAOImpl implements MenuDAO {
                 menu.setImagePath(rs.getString("image_path"));
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -105,7 +103,7 @@ public class MenuDAOImpl implements MenuDAO {
 
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
 
                 Menu menu = new Menu();
 
@@ -119,7 +117,7 @@ public class MenuDAOImpl implements MenuDAO {
                 menuList.add(menu);
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -142,7 +140,7 @@ public class MenuDAOImpl implements MenuDAO {
 
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
 
                 Menu menu = new Menu();
 
@@ -156,10 +154,133 @@ public class MenuDAOImpl implements MenuDAO {
                 menuList.add(menu);
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return menuList;
+    }
+
+    @Override
+    public List<Menu> getAllMenus() {
+
+        List<Menu> menuList = new ArrayList<>();
+
+        String sql = "SELECT * FROM menu";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Menu menu = new Menu();
+
+                menu.setMenuId(rs.getInt("menu_id"));
+                menu.setName(rs.getString("name"));
+                menu.setDescription(rs.getString("description"));
+                menu.setPrice(rs.getDouble("price"));
+                menu.setRestaurantId(rs.getInt("restaurant_id"));
+                menu.setImagePath(rs.getString("image_path"));
+
+                menuList.add(menu);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return menuList;
+    }
+
+    @Override
+    public boolean addMenu(Menu menu) {
+
+        String sql = "INSERT INTO menu(name,description,price,restaurant_id,image_path) VALUES(?,?,?,?,?)";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, menu.getName());
+            ps.setString(2, menu.getDescription());
+            ps.setDouble(3, menu.getPrice());
+            ps.setInt(4, menu.getRestaurantId());
+            ps.setString(5, menu.getImagePath());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean updateMenu(Menu menu) {
+
+        String sql = "UPDATE menu SET name=?, description=?, price=?, restaurant_id=?, image_path=? WHERE menu_id=?";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, menu.getName());
+            ps.setString(2, menu.getDescription());
+            ps.setDouble(3, menu.getPrice());
+            ps.setInt(4, menu.getRestaurantId());
+            ps.setString(5, menu.getImagePath());
+            ps.setInt(6, menu.getMenuId());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean deleteMenu(int menuId) {
+
+        String sql = "DELETE FROM menu WHERE menu_id=?";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, menuId);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    @Override
+    public int getMenuCount() {
+
+        String sql = "SELECT COUNT(*) FROM menu";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 }

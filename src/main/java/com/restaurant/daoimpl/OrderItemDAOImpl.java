@@ -21,7 +21,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
     @Override
     public boolean addOrderItem(OrderItem item) {
 
-        String sql = "INSERT INTO order_item(order_id,menu_id,quantity,price) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO order_items(order_id,menu_id,quantity,price) VALUES(?,?,?,?)";
 
         try {
 
@@ -46,7 +46,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 
         List<OrderItem> list = new ArrayList<>();
 
-        String sql = "SELECT * FROM order_item WHERE order_id=?";
+        String sql = "SELECT * FROM order_items WHERE order_id=?";
 
         try {
 

@@ -1,5 +1,6 @@
 package com.restaurant.dao;
 
+import java.util.List;
 import com.restaurant.model.User;
 
 public interface UserDAO {
@@ -11,4 +12,9 @@ public interface UserDAO {
     User getUserById(int userId);
 
     boolean updateUser(User user);
+
+    // Admin
+    List<User> getAllUsers();
+    
+    int getUserCount();
 }

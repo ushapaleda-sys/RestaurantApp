@@ -6,7 +6,7 @@
 <%@ page import="com.restaurant.dao.RestaurantDAO" %>
 <%@ page import="com.restaurant.daoimpl.RestaurantDAOImpl" %>
 <%
-    User user = (User) session.getAttribute("loggedInUser");
+User user = (User) session.getAttribute("loggedInUser");
     if(user == null){ response.sendRedirect("login.jsp"); return; }
 
     Map<Integer, List<CartItem>> allCarts =
@@ -97,17 +97,19 @@
 <div class="page-hero">
   <div class="container">
     <h2>🛒 Your Cart</h2>
-    <p style="color:#686b78;font-size:0.9rem;margin-top:4px;">Hello, <%= user.getName() %> — items are saved per restaurant</p>
+    <p style="color:#686b78;font-size:0.9rem;margin-top:4px;">Hello, <%=user.getName()%> — items are saved per restaurant</p>
   </div>
 </div>
 
 <div class="container py-4">
 
-  <% if(cart != null && !cart.isEmpty()){ %>
+  <%
+  if(cart != null && !cart.isEmpty()){
+  %>
 
     <%-- Show current restaurant's cart --%>
     <div class="restaurant-label">
-      🍽 <%= currentRestName %> — Current Cart
+      🍽 <%=currentRestName%> — Current Cart
     </div>
 
     <div class="cart-wrap mb-4">
@@ -118,39 +120,41 @@
           </thead>
           <tbody>
             <%
-              double total = 0;
-              for(CartItem item : cart){
-                double it = item.getPrice() * item.getQuantity();
-                total += it;
+            double total = 0;
+                          for(CartItem item : cart){
+                            double it = item.getPrice() * item.getQuantity();
+                            total += it;
             %>
             <tr>
-              <td class="item-name"><%= item.getName() %></td>
-              <td class="item-price">₹<%= item.getPrice() %></td>
-              <td><strong><%= item.getQuantity() %></strong></td>
-              <td class="item-total">₹<%= it %></td>
+              <td class="item-name"><%=item.getName()%></td>
+              <td class="item-price">₹<%=item.getPrice()%></td>
+              <td><strong><%=item.getQuantity()%></strong></td>
+              <td class="item-total">₹<%=it%></td>
               <td>
                 <div class="d-flex align-items-center gap-2 justify-content-center">
                   <form action="updateCart" method="post" class="m-0">
-                    <input type="hidden" name="menuId" value="<%= item.getMenuId() %>">
+                    <input type="hidden" name="menuId" value="<%=item.getMenuId()%>">
                     <input type="hidden" name="action" value="increase">
                     <button class="qty-inc">+</button>
                   </form>
                   <form action="updateCart" method="post" class="m-0">
-                    <input type="hidden" name="menuId" value="<%= item.getMenuId() %>">
+                    <input type="hidden" name="menuId" value="<%=item.getMenuId()%>">
                     <input type="hidden" name="action" value="decrease">
                     <button class="qty-dec">−</button>
                   </form>
                   <form action="removeFromCart" method="post" class="m-0">
-                    <input type="hidden" name="menuId" value="<%= item.getMenuId() %>">
+                    <input type="hidden" name="menuId" value="<%=item.getMenuId()%>">
                     <button class="btn-remove">Remove</button>
                   </form>
                 </div>
               </td>
             </tr>
-            <% } %>
+            <%
+            }
+            %>
             <tr class="grand-row">
               <td colspan="3" class="grand-label">Grand Total</td>
-              <td class="grand-amt">₹<%= total %></td>
+              <td class="grand-amt">₹<%=total%></td>
               <td></td>
             </tr>
           </tbody>
@@ -164,29 +168,29 @@
 
     <%-- Show other restaurants' carts if any --%>
     <%
-      boolean hasOtherCarts = false;
-      if(allCarts != null){
-        for(Map.Entry<Integer, List<CartItem>> entry : allCarts.entrySet()){
-          if(!entry.getKey().equals(currentRestaurantId) && !entry.getValue().isEmpty()){
-            hasOtherCarts = true; break;
+    boolean hasOtherCarts = false;
+          if(allCarts != null){
+            for(Map.Entry<Integer, List<CartItem>> entry : allCarts.entrySet()){
+              if(!entry.getKey().equals(currentRestaurantId) && !entry.getValue().isEmpty()){
+                hasOtherCarts = true; break;
+              }
+            }
           }
-        }
-      }
-      if(hasOtherCarts){
+          if(hasOtherCarts){
     %>
     <div class="other-carts">
       <h5>🛍 Items saved from other restaurants</h5>
       <%
-        for(Map.Entry<Integer, List<CartItem>> entry : allCarts.entrySet()){
-          if(!entry.getKey().equals(currentRestaurantId) && !entry.getValue().isEmpty()){
-            int restId = entry.getKey();
-            List<CartItem> otherCart = entry.getValue();
-            double otherTotal = 0;
-            for(CartItem ci : otherCart) otherTotal += ci.getPrice() * ci.getQuantity();
-            // Get restaurant name
-            String otherRestName = "Restaurant #" + restId;
-            Restaurant otherRest = restDAO.getRestaurantById(restId);
-            if(otherRest != null) otherRestName = otherRest.getName();
+      for(Map.Entry<Integer, List<CartItem>> entry : allCarts.entrySet()){
+                if(!entry.getKey().equals(currentRestaurantId) && !entry.getValue().isEmpty()){
+                  int restId = entry.getKey();
+                  List<CartItem> otherCart = entry.getValue();
+                  double otherTotal = 0;
+                  for(CartItem ci : otherCart) otherTotal += ci.getPrice() * ci.getQuantity();
+                  // Get restaurant name
+                  String otherRestName = "Restaurant #" + restId;
+                  Restaurant otherRest = restDAO.getRestaurantById(restId);
+                  if(otherRest != null) otherRestName = otherRest.getName();
       %>
       <div class="other-cart-item">
         <div>

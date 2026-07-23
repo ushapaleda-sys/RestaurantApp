@@ -25,7 +25,9 @@
   <div class="auth-card">
     <div class="auth-logo">🍽 FoodieApp</div>
     <div class="auth-sub">Sign in to your account</div>
-    <% String error = (String) request.getAttribute("error"); if(error != null) { %>
+    <%
+    String error = (String) request.getAttribute("error"); if(error != null) {
+    %>
     <div class="error-box">⚠ <%= error %></div>
     <% } %>
     <form action="login" method="post">

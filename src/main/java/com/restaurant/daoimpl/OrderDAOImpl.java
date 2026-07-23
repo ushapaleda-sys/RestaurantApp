@@ -124,4 +124,84 @@ public class OrderDAOImpl implements OrderDAO {
 
         return order;
     }
-}
+    
+    @Override
+    public List<Order> getAllOrders() {
+
+        List<Order> orders = new ArrayList<>();
+
+        String sql = "SELECT * FROM orders ORDER BY order_id DESC";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Order order = new Order();
+
+                order.setOrderId(rs.getInt("order_id"));
+                order.setUserId(rs.getInt("user_id"));
+                order.setRestaurantId(rs.getInt("restaurant_id"));
+                order.setTotalAmount(rs.getDouble("total_amount"));
+                order.setPaymentMethod(rs.getString("payment_method"));
+                order.setStatus(rs.getString("status"));
+                order.setOrderDate(rs.getString("order_date"));
+                orders.add(order);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return orders;
+    }
+
+    @Override
+    public int getTotalOrders() {
+
+        String sql = "SELECT COUNT(*) FROM orders";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    @Override
+    public double getTotalRevenue() {
+
+        String sql = "SELECT SUM(total_amount) FROM orders";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    }
+ 

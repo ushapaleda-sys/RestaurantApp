@@ -123,4 +123,100 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 
         return list;
     }
+    
+    @Override
+    public boolean addRestaurant(Restaurant restaurant) {
+
+        String sql = "INSERT INTO restaurant(restaurant_name,address,cuisine_type,rating,image_path) VALUES(?,?,?,?,?)";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, restaurant.getName());
+            ps.setString(2, restaurant.getAddress());
+            ps.setString(3, restaurant.getCuisineType());
+            ps.setDouble(4, restaurant.getRating());
+            ps.setString(5, restaurant.getImagePath());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    @Override
+    public boolean updateRestaurant(Restaurant restaurant) {
+
+        String sql = "UPDATE restaurant SET restaurant_name=?, address=?, cuisine_type=?, rating=?, image_path=? WHERE restaurant_id=?";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, restaurant.getName());
+            ps.setString(2, restaurant.getAddress());
+            ps.setString(3, restaurant.getCuisineType());
+            ps.setDouble(4, restaurant.getRating());
+            ps.setString(5, restaurant.getImagePath());
+            ps.setInt(6, restaurant.getRestaurantId());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    @Override
+    public boolean deleteRestaurant(int restaurantId) {
+
+        String sql = "DELETE FROM restaurant WHERE restaurant_id=?";
+
+        try {
+
+            System.out.println("Inside deleteRestaurant()");
+            System.out.println("Restaurant ID = " + restaurantId);
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, restaurantId);
+
+            int rows = ps.executeUpdate();
+
+            System.out.println("Rows Deleted = " + rows);
+
+            return rows > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    @Override
+    public int getRestaurantCount() {
+
+        String sql = "SELECT COUNT(*) FROM restaurant";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 }

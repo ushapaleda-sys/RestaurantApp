@@ -57,11 +57,11 @@
 <div class="container py-4">
   <div class="row g-4">
     <%
-      List<Restaurant> list = (List<Restaurant>) request.getAttribute("restaurantList");
-      if(list != null && !list.isEmpty()){
-        for(Restaurant r : list){
-          String img = r.getImagePath();
-          if(img == null || img.trim().isEmpty()) img = "default.jpg";
+    List<Restaurant> list = (List<Restaurant>) request.getAttribute("restaurantList");
+          if(list != null && !list.isEmpty()){
+            for(Restaurant r : list){
+            	String img = r.getImagePath();
+              if(img == null || img.trim().isEmpty()) img = "default.jpg";
     %>
     <div class="col-md-6 col-lg-4">
       <div class="r-card h-100">

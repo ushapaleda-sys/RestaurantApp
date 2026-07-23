@@ -10,4 +10,10 @@ public interface OrderDAO {
     List<Order> getOrdersByUser(int userId);
 
     Order getOrderById(int orderId);
+
+    List<Order> getAllOrders();
+    
+    int getTotalOrders();
+
+    double getTotalRevenue();
 }

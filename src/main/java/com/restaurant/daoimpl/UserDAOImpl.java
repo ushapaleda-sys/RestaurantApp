@@ -1,5 +1,7 @@
 package com.restaurant.daoimpl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,7 +77,6 @@ public class UserDAOImpl implements UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return user;
     }
 
@@ -136,7 +137,63 @@ public class UserDAOImpl implements UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return false;
+    }
+    
+    @Override
+    public List<User> getAllUsers() {
+
+        List<User> users = new ArrayList<>();
+
+        String sql = "SELECT * FROM users";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                User user = new User();
+
+                user.setUserId(rs.getInt("user_id"));
+                user.setName(rs.getString("name"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+
+                users.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
+    
+    @Override
+    public int getUserCount() {
+
+        String sql = "SELECT COUNT(*) FROM users";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 }
